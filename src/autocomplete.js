@@ -151,9 +151,9 @@ export default class Autocomplete extends Component {
   }
 
   // This template is used when displaying results / suggestions.
-  templateSuggestion (value) {
+  templateSuggestion (value, query) {
     const suggestionTemplate = this.props.templates && this.props.templates.suggestion
-    return suggestionTemplate ? suggestionTemplate(value) : value
+    return suggestionTemplate ? suggestionTemplate(value, query) : value
   }
 
   handleComponentBlur (newState) {
@@ -498,7 +498,7 @@ export default class Autocomplete extends Component {
               <li
                 aria-selected={focused === index}
                 className={`${optionClassName}${optionModifierFocused}${optionModifierOdd}`}
-                dangerouslySetInnerHTML={{ __html: this.templateSuggestion(option) }}
+                dangerouslySetInnerHTML={{ __html: this.templateSuggestion(option, query) }}
                 id={`${id}__option--${index}`}
                 key={index}
                 onFocusOut={(event) => this.handleOptionBlur(event, index)}
